@@ -1,4 +1,4 @@
-var socket = io();
+
 var isLineUser = false;
 // Configuration
 var line_thickness = 7;
@@ -35,20 +35,13 @@ function initializeApp(data) {
             'userProfile': profile
         };
 
-        //socket.emit('debug', userData);
-        socket.emit('lineRegister', userData, function (msg){
-            alert(msg);
-        });
     }).catch(function (error) {
         window.alert("Error getting profile: " + error);
     });
     
     document.getElementById('submit-drawing-data').addEventListener('click', function () {
         var drawKeyword =  document.getElementById('drawKeyword').value;
-        socket.emit('submitData', userData, drawKeyword, replayData, function (msg){
-            replayData = [];
-            alert(msg);
-        });
+        
     });
 
     document.getElementById('delete').addEventListener('click', function () {
@@ -65,7 +58,7 @@ function initializeApp(data) {
 
     document.getElementById('getUserList').addEventListener('click', function () {
         alert('getuserlist');
-        socket.emit('requestUserList', userData);
+        
     });
 
     // closeWindow call
@@ -98,11 +91,11 @@ function initializeApp(data) {
 
     $('#doReplay').click(function (e){
         e.preventDefault;
-        socket.emit('replay', true);
+        
     });
     $('#debug').click(function (e){
         e.preventDefault;
-        socket.emit('debug', true);
+        
     });
 
 
