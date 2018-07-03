@@ -1,5 +1,4 @@
 console.log(`Starting Server with`);
-
 require('./config/config');
 //Main module to setting up HTTP server
 const _ = require('lodash');
