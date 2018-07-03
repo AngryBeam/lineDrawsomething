@@ -15,7 +15,14 @@ function initializeApp(data) {
             'userData': lineUserData,
             'userProfile': profile
         };
-        document.getElementById('viewtypefield').textContent = userData;
+        liff.sendMessages([{
+            type: 'text',
+            text: userData
+        }]).then(function () {
+            //window.alert("Message sent");
+        }).catch(function (error) {
+            window.alert("Error sending message: " + error);
+        });
 
     }).catch(function (error) {
         window.alert("Error getting profile: " + error);
