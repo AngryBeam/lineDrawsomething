@@ -15,6 +15,7 @@ function initializeApp(data) {
             'userData': lineUserData,
             'userProfile': profile
         };
+        document.getElementById('viewtypefield').textContent = userData;
 
     }).catch(function (error) {
         window.alert("Error getting profile: " + error);
