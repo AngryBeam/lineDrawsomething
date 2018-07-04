@@ -1,5 +1,5 @@
 export const elements = {
-    loadBody: document.querySelector('#loadBody'),
+    loadBody: document.querySelector('#loadBody')
 };
 
 export const elementStrings = {
