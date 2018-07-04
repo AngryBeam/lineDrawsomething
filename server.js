@@ -159,7 +159,7 @@ app.post('/todos', authenticate, (req, res) => {
 
   
 app.post('/users/register', (req, res) => {
-    
+    console.log(`Incoming Data: ${req.body}`);
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     var user = new User(body);
     user.saveUserData();
