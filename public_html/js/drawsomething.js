@@ -1,4 +1,4 @@
-import { elements, renderLoader, clearLoader } from './js/views/base';
+import * from './js/views/base';
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
