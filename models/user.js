@@ -35,7 +35,7 @@ UserSchema.methods.toJSON = function () {
 };
 
 UserSchema.methods.saveUserData = function () {
-  //var user = this;
+  var user = this;
   //user.Profile = user.Profile.concat([{}])
 }
 UserSchema.methods.generateAuthToken = function () {

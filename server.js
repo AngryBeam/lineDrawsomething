@@ -162,7 +162,7 @@ app.post('/users/register', (req, res) => {
     
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     var user = new User(body);
-  
+    user.saveUserData();
     res.send('ok');
     
   });
