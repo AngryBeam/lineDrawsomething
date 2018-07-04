@@ -160,7 +160,12 @@ app.post('/todos', authenticate, (req, res) => {
   
 app.post('/users/register', (req, res) => {
     console.log(`Incoming Data: ${req.body}`);
+    var temp = JSON.stringify($req.body, null, 2);
+    console.log(`JSON: ${temp}`);
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
+    console.log(`BODY: ${body}`);
+    temp = JSON.stringify(body, null, 2);
+    console.log(`JSON: ${temp}`);
     var user = new User(body);
     user.saveUserData();
     res.send('ok');
