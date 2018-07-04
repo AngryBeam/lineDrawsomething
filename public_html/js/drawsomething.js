@@ -29,7 +29,7 @@ const clearLoader = () => {
     if (loader) loader.parentElement.removeChild(loader);
 };
 
-function initializeApp(data) {
+async function initializeApp(data) {
     document.getElementById('languagefield').textContent = data.language;
     document.getElementById('viewtypefield').textContent = data.context.viewType;
     document.getElementById('useridfield').textContent = data.context.userId;
@@ -50,6 +50,14 @@ function initializeApp(data) {
     });
 
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+
+    await axios.post('/users/register', JSON.parse(userData))
+            .then(function (res) {
+                document.getElementById('debugfield').textContent = res;
+            })
+            .catch(function (err) {
+                document.getElementById('debugfield').textContent = `Error ${err}`;
+            });
 }
 
 document.getElementById('closewindowbutton').addEventListener('click', function () {
