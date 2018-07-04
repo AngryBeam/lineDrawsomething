@@ -32,22 +32,13 @@ function initializeApp(data) {
     
 } */
 
-/* window.onload = function (e) {
+window.onload = function (e) {
+    renderLoader(elements.mainBody);
     liff.init(function (data) {
         initializeApp(data);
     });
-}; */
-renderLoader(elements.mainBody);
 
-    liff.init(function (data){
-        initializeApp(data);
-        clearLoader();
-    }).catch(function (error) {
-        alert('Line liff initial fail =>' + error);
-        clearLoader();
-    });
-
-
+};
 
 function initializeApp(data) {
     document.getElementById('languagefield').textContent = data.language;
