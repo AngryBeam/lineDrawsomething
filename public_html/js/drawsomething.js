@@ -33,11 +33,9 @@ function initializeApp(data) {
 } */
 
 window.onload = function (e) {
-    renderLoader(elements.mainBody);
     liff.init(function (data) {
         initializeApp(data);
     });
-
 };
 
 function initializeApp(data) {
