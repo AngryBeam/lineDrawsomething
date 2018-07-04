@@ -50,15 +50,16 @@ function initializeApp(data) {
         userData.pictureUrl = profile.pictureUrl;
     });
 
-    document.getElementById('debugfield').textContent = JSON.parse(userData);
-    sendData('/users/register', JSON.parse(userData));
+    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+    sendData('/users/register', userData);
     
 }
 
 async function sendData(path, data){
     document.getElementById('axiosfield').textContent = `Sending Data: ${data}`;
     try {
-        const res = await axios.post(path, data);
+        //const res = await axios.post(path, data);
+        const res = await axios(path);      
         document.getElementById('debugfield').textContent = JSON.stringify(res, null, 2);
     } catch (error) {
         alert(error);
