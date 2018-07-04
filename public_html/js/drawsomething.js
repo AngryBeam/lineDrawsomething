@@ -55,12 +55,16 @@ function initializeApp(data) {
     
 }
 
-async function sendData(path, data){
+async function sendData(url, data){
     document.getElementById('axiosfield').textContent = `Sending Data: ${data}`;
     try {
-        //const res = await axios.post(path, data);
-        const res = await axios(path);      
-        document.getElementById('debugfield').textContent = JSON.stringify(res, null, 2);
+        const res = await axios({
+            method: 'post',
+            url: url,
+            data: data
+        });
+        //const res = await axios(path);      
+        document.getElementById('debugfield').textContent = res;
     } catch (error) {
         alert(error);
     }
