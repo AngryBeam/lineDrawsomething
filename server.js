@@ -160,16 +160,11 @@ app.post('/todos', authenticate, (req, res) => {
   
 app.post('/users/register', (req, res) => {
     
-    var body = _.pick(req.body, ['email', 'password']);
+    var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     var user = new User(body);
   
-    user.save().then(() => {
-      return user.generateAuthToken();
-    }).then((token) => {
-      res.header('x-auth', token).send(user);
-    }).catch((e) => {
-      res.status(400).send(e);
-    })
+    res.send('ok');
+    
   });
 
 app.get('/users/me', authenticate, (req, res) => {    //Using a middle ware for authenticate

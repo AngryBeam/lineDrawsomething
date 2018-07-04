@@ -5,32 +5,26 @@ const _ = require('lodash');
 const bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
-  email: {
+  userId: {
     type: String,
     required: true,
     trim: true,
-    minlength: 1,
-    unique: true,
-    validate: {
-      validator: validator.isEmail,
-      message: '{VALUE} is not a valid email'
-    }
+    minlength: 6,
   },
-  password: {
+  channelId: {
     type: String,
     require: true,
     minlength: 6
   },
-  tokens: [{
-    access: {
+  displayName: {
       type: String,
       required: true
-    },
-    token: {
+  },
+  pictureUrl: {
       type: String,
       required: true
-    }
-  }]
+  }
+
 });
 
 UserSchema.methods.toJSON = function () {
@@ -40,6 +34,10 @@ UserSchema.methods.toJSON = function () {
   return _.pick(userObject, ['_id', 'email']);
 };
 
+UserSchema.methods.saveUserData = function () {
+  //var user = this;
+  //user.Profile = user.Profile.concat([{}])
+}
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
   var access = 'auth';
@@ -114,6 +112,6 @@ UserSchema.pre('save', function (next) {
   }
 });
 
-var User = mongoose.model('User', UserSchema);
+var User = mongoose.model('lineDrawsomething_User', UserSchema);
 
 module.exports = {User}
