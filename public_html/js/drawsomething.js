@@ -48,6 +48,8 @@ function initializeApp(data) {
         userData.displayName = profile.displayName;
         userData.pictureUrl = profile.pictureUrl;
     });
+
+    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
 }
 
 document.getElementById('closewindowbutton').addEventListener('click', function () {
