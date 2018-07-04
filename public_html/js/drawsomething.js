@@ -1,4 +1,7 @@
+var {elements, renderLoader, clearLoader} = require('./views/base');
+
 window.onload = function (e) {
+    renderLoader(elements.loadBody);
     liff.init(function (data) {
         initializeApp(data);
     });
