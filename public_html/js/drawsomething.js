@@ -1,4 +1,4 @@
-var {elements, renderLoader, clearLoader} = require('./views/base');
+const {elements, renderLoader, clearLoader} = require('./views/base');
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
