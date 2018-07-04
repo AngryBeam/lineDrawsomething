@@ -29,7 +29,7 @@ const clearLoader = () => {
     if (loader) loader.parentElement.removeChild(loader);
 };
 
-async function initializeApp(data) {
+function initializeApp(data) {
     document.getElementById('languagefield').textContent = data.language;
     document.getElementById('viewtypefield').textContent = data.context.viewType;
     document.getElementById('useridfield').textContent = data.context.userId;
@@ -51,8 +51,18 @@ async function initializeApp(data) {
 
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
 
-    var res = await axios.post('/users/register', JSON.parse(userData));
-    document.getElementById('debugfield').textContent = res;
+    sendData('/users/register', JSON.parse(userData));
+    
+}
+
+async function sendData(path, data){
+    document.getElementById('axiosfield').textContent = 'Sending Data';
+    try {
+        const res = await axios.post(path, data);
+        document.getElementById('axiosfield').textContent = JSON.stringify(res, null, 2);
+    } catch (error) {
+        alert(error);
+    }
 }
 
 document.getElementById('closewindowbutton').addEventListener('click', function () {
