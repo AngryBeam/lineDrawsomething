@@ -6,6 +6,7 @@ window.onload = function (e) {
     renderLoader(elements.loadBody);
     liff.init(function (data) {
         initializeApp(data);
+        alert(userData);
     });
     clearLoader();
 
@@ -49,8 +50,7 @@ function initializeApp(data) {
         userData.pictureUrl = profile.pictureUrl;
     });
 
-    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-
+    document.getElementById('debugfield').textContent = JSON.parse(userData);
     sendData('/users/register', JSON.parse(userData));
     
 }
