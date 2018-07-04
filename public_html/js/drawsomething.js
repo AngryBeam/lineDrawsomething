@@ -51,13 +51,8 @@ async function initializeApp(data) {
 
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
 
-    await axios.post('/users/register', JSON.parse(userData))
-            .then(function (res) {
-                document.getElementById('debugfield').textContent = res;
-            })
-            .catch(function (err) {
-                document.getElementById('debugfield').textContent = `Error ${err}`;
-            });
+    var res = await axios.post('/users/register', JSON.parse(userData));
+    document.getElementById('debugfield').textContent = res;
 }
 
 document.getElementById('closewindowbutton').addEventListener('click', function () {
