@@ -7,6 +7,7 @@ window.onload = function (e) {
     liff.init(function (data) {
         initializeApp(data);
     });
+    clearLoader();
 
 };
 
@@ -17,9 +18,7 @@ const elementStrings = {
 const renderLoader = parent => {
     const loader = `
         <div class="${elementStrings.loader}">
-            <svg>
-                <use href="images/Pacman-1s-200px.svg"></use>
-            </svg>
+            <img src="images/Ellipsis-1s-200px.gif">
         </div>
     `;
     parent.insertAdjacentHTML('afterbegin', loader);
