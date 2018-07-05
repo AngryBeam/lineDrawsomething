@@ -6,7 +6,8 @@ window.onload = function (e) {
     renderLoader(elements.loadBody);
     liff.init(function (data) {
         initializeApp(data);
-        alert(userData);
+        document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+        sendData('/users/register', userData);
     });
     clearLoader();
 
@@ -44,19 +45,14 @@ function initializeApp(data) {
         userId: data.context.userId,
         channelId: channelId
     }
-
     liff.getProfile().then(function (profile) {
         userData.displayName = profile.displayName;
         userData.pictureUrl = profile.pictureUrl;
     });
-
-    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-    sendData('/users/register', userData);
-    
 }
 
 async function sendData(url, data){
-    document.getElementById('axiosfield').textContent = `Sending Data: ${data}`;
+    
     try {
         const res = await axios({
             method: 'post',
@@ -64,7 +60,7 @@ async function sendData(url, data){
             data: data
         });
         //const res = await axios(path);      
-        document.getElementById('debugfield').textContent = res;
+        document.getElementById('axiosfield').textContent = res;
     } catch (error) {
         alert(error);
     }
