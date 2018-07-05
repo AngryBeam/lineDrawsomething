@@ -1,14 +1,15 @@
 const elements = {
     loadBody: document.querySelector('#loadBody')
 };
+var userData;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
     liff.init(function (data) {
         initializeApp(data);
-        document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-        sendData('/users/register', userData);
     });
+    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+    sendData('/users/register', userData);
     clearLoader();
 
 };
@@ -39,7 +40,7 @@ function initializeApp(data) {
     document.getElementById('roomidfield').textContent = data.context.roomId;
     document.getElementById('groupidfield').textContent = data.context.groupId;
     var channelId = data.context.utouId || data.context.roomId || data.context.groupId;
-    var userData = {
+    userData = {
         language: data.language,
         viewtype: data.context.viewType,
         userId: data.context.userId,
