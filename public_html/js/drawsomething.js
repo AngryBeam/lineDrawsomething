@@ -40,7 +40,7 @@ function initializeApp(data) {
     document.getElementById('roomidfield').textContent = data.context.roomId;
     document.getElementById('groupidfield').textContent = data.context.groupId;
     var channelId = data.context.utouId || data.context.roomId || data.context.groupId;
-    userData = {
+    this.userData = {
         language: data.language,
         viewtype: data.context.viewType,
         userId: data.context.userId,
@@ -48,8 +48,8 @@ function initializeApp(data) {
     }
     document.getElementById('debug1').textContent = JSON.stringify(userData, null, 2);
     liff.getProfile().then((profile) => {
-        userData.displayName = profile.displayName;
-        userData.pictureUrl = profile.pictureUrl;
+        this.userData.displayName = profile.displayName;
+        this.userData.pictureUrl = profile.pictureUrl;
         document.getElementById('roomidfield').textContent = profile.displayName;
         document.getElementById('groupidfield').textContent = profile.pictureUrl;
         document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
