@@ -61,7 +61,7 @@ async function sendData(url, data){
             data: data
         });
         //const res = await axios(path);      
-        document.getElementById('axiosfield').textContent = res;
+        document.getElementById('axiosfield').textContent = JSON.stringify(res, null, 2);
     } catch (error) {
         alert(error);
     }
