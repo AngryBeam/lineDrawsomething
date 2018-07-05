@@ -1,12 +1,12 @@
-export const elements = {
+const elements = {
     loadBody: document.querySelector('#loadBody')
 };
 
-export const elementStrings = {
+const elementStrings = {
     loader: 'loader'
 };
 
-export const renderLoader = parent => {
+const renderLoader = parent => {
     const loader = `
         <div class="${elementStrings.loader}">
             <svg>
@@ -17,7 +17,9 @@ export const renderLoader = parent => {
     parent.insertAdjacentHTML('afterbegin', loader);
 };
 
-export const clearLoader = () => {
+const clearLoader = () => {
     const loader = document.querySelector(`.${elementStrings.loader}`);
     if (loader) loader.parentElement.removeChild(loader);
 };
+
+module.exports = {elements, elementStrings, renderLoader, clearLoader}
