@@ -170,12 +170,16 @@ app.post('/users/register', (req, res) => {
     }).catch((e) => {
       res.status(400).send(e);
     })
-
-     /*  user.save();
+    
+    /* try {
+      var user = new User(body);
+      user.save();
       User.findByChannelId(body.channelId).then((channelList) => {
         res.send({channelList});
-      }); */
-  
+      });
+    } catch (e) {
+        res.send(e);
+    } */
     
   });
 
