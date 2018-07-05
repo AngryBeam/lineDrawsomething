@@ -162,7 +162,7 @@ app.post('/users/register', (req, res) => {
     console.log('Incoming Data');
     console.log(JSON.stringify(req.body, null ,2));
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
-    try {
+    /* try {
       var user = new User(body);
       user.save();
       User.findByChannelId(body.channelId).then((channelList) => {
@@ -170,7 +170,7 @@ app.post('/users/register', (req, res) => {
       });
     } catch (e) {
         res.send(e);
-    }
+    } */
     
   });
 
