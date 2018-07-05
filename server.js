@@ -163,19 +163,25 @@ app.post('/users/register', (req, res) => {
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     var user = new User(body);
     user.save();
-    User.findByChannelId(body.channelId).then((channelList) => {
-      res.send({channelList});
-    });
+    try {
+      User.findByChannelId(body.channelId).then((channelList) => {
+        res.send({channelList});
+      });
+    } catch (e) {
+        res.send(e);
+    }
     
   });
 
 app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authenticate
     var id = req.params.id;
-  
-    User.findByChannelId(id).then((channelList) => {
-      res.send({channelList});
-    });
-    
+    try {
+      User.findByChannelId(id).then((channelList) => {
+        res.send({channelList});
+      });
+  } catch (e) {
+      res.send(e);
+  }
   });
 
 
