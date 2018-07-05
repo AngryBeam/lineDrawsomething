@@ -167,9 +167,12 @@ app.post('/users/register', (req, res) => {
     
   });
 
-app.get('/users/me', authenticate, (req, res) => {    //Using a middle ware for authenticate
-    console.log(`Req=> ${req.user}`);
-    res.send(req.user);
+app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authenticate
+    var id = req.params.id;
+    //var body = _.pick(req.body, ['channelId']);
+    var channelList = User.findByChannelId(id);
+
+    res.send(channelList);
   });
 
 

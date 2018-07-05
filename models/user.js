@@ -26,7 +26,8 @@ var UserSchema = new mongoose.Schema({
   }
 
 });
-UserSchema.index({ userId: 1, channelId: 1 });
+
+//UserSchema.index({ userId: 1, channelId: 1 });
 
 UserSchema.methods.toJSON = function () {
   var user = this;
@@ -35,10 +36,7 @@ UserSchema.methods.toJSON = function () {
   return _.pick(userObject, ['_id', 'email']);
 };
 
-UserSchema.methods.saveUserData = function () {
-  var user = this;
-  //user.Profile = user.Profile.concat([{}])
-}
+
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
   var access = 'auth';
@@ -99,12 +97,21 @@ UserSchema.statics.findByCredentials = function (email, password) {
   });
 };
 
+UserSchema.statics.findByChannelId = function (channelId) {
+  var User = this;
+  return User.find({
+    'channelId': channelId
+  });
+};
+
 UserSchema.pre('save', function (next) {
   var user = this;
 
     next();
 
 });
+
+
 
 var User = mongoose.model('User', UserSchema);
 
