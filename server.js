@@ -159,11 +159,12 @@ app.post('/todos', authenticate, (req, res) => {
 
   
 app.post('/users/register', (req, res) => {
-
+    console.log('Incoming Data');
+    console.log(JSON.stringify(req.body, null ,2));
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     var user = new User(body);
-    user.save();
     try {
+      user.save();
       User.findByChannelId(body.channelId).then((channelList) => {
         res.send({channelList});
       });
