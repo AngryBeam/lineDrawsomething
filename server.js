@@ -163,38 +163,22 @@ app.post('/users/register', (req, res) => {
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     var user = new User(body);
     user.save();
-    res.send(user);
+    User.findByChannelId(body.channelId).then((channelList) => {
+      res.send({channelList});
+    });
     
   });
 
 app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authenticate
     var id = req.params.id;
-    //var body = _.pick(req.body, ['channelId']);
-    var channelList = User.findByChannelId(id);
-
-    res.send(channelList);
-  });
-
-
-app.post('/users/login', (req, res) => {
-    var body = _.pick(req.body, ['email', 'password']);
   
-    User.findByCredentials(body.email, body.password).then((user) => {
-      return user.generateAuthToken().then((token) => {
-        res.header('x-auth', token).send(user);
-      });
-    }).catch((e) => {
-      res.status(400).send();
+    User.findByChannelId(id).then((channelList) => {
+      res.send({channelList});
     });
+    
   });
-  
-app.delete('/users/me/logout', authenticate, (req, res) => {
-    req.user.removeToken(req.token).then(() => {
-      res.status(200).send();
-    }, () => {
-      res.status(400).send();
-    });
-  });
+
+
 
   //====================================================================================
 

@@ -29,12 +29,12 @@ var UserSchema = new mongoose.Schema({
 
 //UserSchema.index({ userId: 1, channelId: 1 });
 
-UserSchema.methods.toJSON = function () {
+/* UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject();
 
   return _.pick(userObject, ['_id', 'email']);
-};
+}; */
 
 
 UserSchema.methods.generateAuthToken = function () {
