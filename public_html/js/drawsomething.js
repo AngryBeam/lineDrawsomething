@@ -5,11 +5,11 @@ var userData;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
-    liff.init(function (data) {
+    liff.init((data) => {
         initializeApp(data);
     });
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-    sendData('/users/register', userData);
+    
     clearLoader();
 
 };
@@ -47,13 +47,13 @@ function initializeApp(data) {
         channelId: channelId
     }
     document.getElementById('debug1').textContent = JSON.stringify(userData, null, 2);
-    liff.getProfile().then(function (profile) {
+    liff.getProfile().then((profile) => {
         userData.displayName = profile.displayName;
         userData.pictureUrl = profile.pictureUrl;
         document.getElementById('roomidfield').textContent = profile.displayName;
         document.getElementById('groupidfield').textContent = profile.pictureUrl;
         document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
-        
+        sendData('/users/register', userData);
     });
     document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
 }
