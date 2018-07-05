@@ -49,6 +49,8 @@ function initializeApp(data) {
     liff.getProfile().then(function (profile) {
         userData.displayName = profile.displayName;
         userData.pictureUrl = profile.pictureUrl;
+        document.getElementById('roomidfield').textContent = profile.displayName;
+        document.getElementById('groupidfield').textContent = profile.pictureUrl;
     });
 }
 
