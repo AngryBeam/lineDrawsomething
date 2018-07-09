@@ -162,25 +162,31 @@ app.post('/users/register', (req, res) => {
     console.log('Incoming Data');
     console.log(JSON.stringify(req.body, null ,2));
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
-    var user = new User(body);
+    /* var user = new User(body);
     user.save().then(() => {
       return User.findByChannelId(body.channelId);
     }).then((channelList) => {
       res.send({channelList});
     }).catch((e) => {
       res.status(400).send(e);
-    })
-    
-    /* try {
-      var user = new User(body);
-      user.save();
-      User.findByChannelId(body.channelId).then((channelList) => {
-        res.send({channelList});
+    }) */
+ 
+    try {
+      User.checkUserId(body.userId, body.channelId).then((haveUser) =>{
+        if(!haveUser){
+          var user = new User(body);
+          user.save().catch((e) => {
+              console.log(`Unable to save user: ${e}`);
+          });
+        }
+        User.findByChannelId(body.channelId).then((channelList) => {
+          res.send({channelList});
+        });
       });
     } catch (e) {
-        res.send(e);
-    } */
-    
+      console.log(`Something Error: ${e}`);
+    }
+
   });
 
 app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authenticate
@@ -189,9 +195,9 @@ app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authentica
       User.findByChannelId(id).then((channelList) => {
         res.send({channelList});
       });
-  } catch (e) {
+    } catch (e) {
       res.send(e);
-  }
+    }
   });
 
 

@@ -104,6 +104,14 @@ UserSchema.statics.findByChannelId = function (channelId) {
   });
 };
 
+UserSchema.statics.checkUserId = function (userId, channelId) {
+  var User = this;
+  return User.find({
+    'userId': userId,
+    'channelId': channelId
+  });
+};
+
 UserSchema.pre('save', function (next) {
   var user = this;
 

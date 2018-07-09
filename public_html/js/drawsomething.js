@@ -82,7 +82,7 @@ async function sendData(url, data){
     } catch (error) {
         //alert(error);
         document.getElementById('axiosfield').textContent = JSON.stringify(error, null, 2);
-        return reject(error);
+        return Promise.reject(error);
     }
 
 }
