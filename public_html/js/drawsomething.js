@@ -1,5 +1,8 @@
 const elements = {
-    loadBody: document.querySelector('#loadBody')
+    loadBody: document.querySelector('#loadBody'),
+    lineUserData : document.querySelector('#lineUserData'),
+    lobby : document.querySelector('#lobby'),
+    gamePlay : document.querySelector('#gamePlay')
 };
 
 var userData;
@@ -20,6 +23,9 @@ window.onload = function (e) {
                     isDone = true;
                     document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
                     clearLoader();
+                    elements.lobby.style.display = 'block';
+                    elements.lineUserData.style.display = 'none';
+                    //elements.lobby.insertAdjacentHTML('beforeend', markup);
                 }).catch(function (e) {
                     document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
                 });
@@ -29,7 +35,7 @@ window.onload = function (e) {
             });
         },
         err => {
-          // LIFF initialization failed
+          console.log(err);
         }
     );
     
@@ -87,6 +93,3 @@ async function sendData(url, data){
 
 }
 
-document.getElementById('closewindowbutton').addEventListener('click', function () {
-    liff.closeWindow();
-});
