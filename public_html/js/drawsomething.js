@@ -2,6 +2,7 @@ const elements = {
     loadBody: document.querySelector('#loadBody'),
     lineUserData : document.querySelector('#lineUserData'),
     lobby : document.querySelector('#lobby'),
+    lobbyTable: document.querySelector('#lobbyTable'),
     gamePlay : document.querySelector('#gamePlay')
 };
 
@@ -101,6 +102,6 @@ function renderLobby(res){
                         <th><img src="${element.pictureUrl}"></th>
                         <td id="displayName">${element.displayName}</td>
                     </tr>`;
-        elements.lobby.insertAdjacentHTML('beforeend', markup);
+        elements.lobbyTable.insertAdjacentHTML('beforeend', markup);
     });
 }
