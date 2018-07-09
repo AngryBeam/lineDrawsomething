@@ -26,7 +26,7 @@ renderLoader(elements.loadBody);
             }).then(() => {
                 document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
                 sendData('/users/register', userData);
-                clearLoader();
+                //clearLoader();
             }).catch(function (error) {
                 window.alert("Error getting profile: " + error);
             });
