@@ -1,7 +1,7 @@
 const elements = {
     loadBody: document.querySelector('#loadBody')
 };
-var userData;
+
 
 //window.onload = function (e) {
     /* renderLoader(elements.loadBody);
@@ -15,17 +15,18 @@ var userData;
         data => {
           // Now you can call LIFF API
           //const userId = data.context.userId;
-            userData = initializeApp(data);
+            var userData = initializeApp(data);
             liff.getProfile().then((profile) => {
-                userData.displayName = profile.displayName;
-                userData.pictureUrl = profile.pictureUrl;
+                this.userData.displayName = profile.displayName;
+                this.userData.pictureUrl = profile.pictureUrl;
             });
+            document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
         },
         err => {
           // LIFF initialization failed
         }
       );
-    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+    
 //};
 
 const elementStrings = {
