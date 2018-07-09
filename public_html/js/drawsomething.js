@@ -2,7 +2,8 @@ const elements = {
     loadBody: document.querySelector('#loadBody')
 };
 
-
+var userData;
+var isDone = false;
 //window.onload = function (e) {
     /* renderLoader(elements.loadBody);
     liff.init((data) => {
@@ -16,19 +17,18 @@ const elements = {
           // Now you can call LIFF API
           //const userId = data.context.userId;
             var userData = initializeApp(data);
-            var userProfile = liff.getProfile(profile => {
-                return profile;
+            liff.getProfile().then((userProfile) => {
+                userData.displayName = userProfile.displayName;
+                userData.pictureUrl = userProfile.pictureUrl;
+                isDone = true;
             });
-            this.userData.displayName = userProfile.displayName;
-            this.userData.pictureUrl = userProfile.pictureUrl;
-            document.getElementById('debug2').textContent = JSON.stringify(userProfile, null, 2);
-            
-            document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
         },
         err => {
           // LIFF initialization failed
         }
-      );
+      ).then(() => {
+        document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+      });
     
 //};
 
@@ -51,20 +51,16 @@ const clearLoader = () => {
 };
 
 function initializeApp(data) {
-    document.getElementById('languagefield').textContent = data.language;
-    document.getElementById('viewtypefield').textContent = data.context.viewType;
-    document.getElementById('useridfield').textContent = data.context.userId;
-    document.getElementById('utouidfield').textContent = data.context.utouId;
-    document.getElementById('roomidfield').textContent = data.context.roomId;
-    document.getElementById('groupidfield').textContent = data.context.groupId;
+    
     var channelId = data.context.utouId || data.context.roomId || data.context.groupId;
+
     userData = {
         language: data.language,
         viewtype: data.context.viewType,
         userId: data.context.userId,
         channelId: channelId
     }
-    document.getElementById('debug1').textContent = JSON.stringify(userData, null, 2);
+    
     return userData;
 }
 
@@ -77,8 +73,7 @@ function getProfile(userData){
         document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
         sendData('/users/register', userData);
     });
-    userData.displayName = profile.displayName;
-    userData.pictureUrl = profile.pictureUrl;
+  
     document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
     return userData;
 }
