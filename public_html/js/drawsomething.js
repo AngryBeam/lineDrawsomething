@@ -9,17 +9,21 @@ window.onload = function (e) {
     renderLoader(elements.loadBody);
     liff.init(
         data => {
-          // Now you can call LIFF API
-          //const userId = data.context.userId;
             userData = initializeApp(data);
-            //liff.getProfile().then((userProfile) => {
             liff.getProfile().then(function (userProfile) {
                 userData.displayName = userProfile.displayName;
                 userData.pictureUrl = userProfile.pictureUrl;
-                isDone = true;
             }).then(() => {
                 document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-                sendData('/users/register', userData);
+           
+                sendData('/users/register', userData).then((res) => {
+                    isDone = true;
+                    document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
+                    clearLoader();
+                }).catch(function (e) {
+
+                });
+                
             }).catch(function (error) {
                 window.alert("Error getting profile: " + error);
             });
@@ -27,9 +31,7 @@ window.onload = function (e) {
         err => {
           // LIFF initialization failed
         }
-    ).then(() =>{
-        clearLoader();
-    });
+    );
     
 };
 
@@ -76,10 +78,13 @@ async function sendData(url, data){
         });
         //const res = await axios(path);      
         document.getElementById('axiosfield').textContent = JSON.stringify(res, null, 2);
+        return res;
     } catch (error) {
         //alert(error);
         document.getElementById('axiosfield').textContent = JSON.stringify(error, null, 2);
+        return reject(error);
     }
+
 }
 
 document.getElementById('closewindowbutton').addEventListener('click', function () {
