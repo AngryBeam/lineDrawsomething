@@ -8,7 +8,7 @@ const elements = {
 var userData;
 var isDone = false;
 
-window.onload = async function (e) {
+window.onload = function (e) {
     renderLoader(elements.loadBody);
     liff.init(
         data => {
@@ -19,7 +19,7 @@ window.onload = async function (e) {
             }).then(() => {
                 document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
            
-                await sendData('/users/register', userData).then((res) => {
+                sendData('/users/register', userData).then((res) => {
                     isDone = true;
                     document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
                     
