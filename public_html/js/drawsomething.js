@@ -17,12 +17,17 @@ renderLoader(elements.loadBody);
         data => {
           // Now you can call LIFF API
           //const userId = data.context.userId;
-            var userData = initializeApp(data);
+            userData = initializeApp(data);
             liff.getProfile().then((userProfile) => {
+                document.getElementById('debugfield').textContent = JSON.stringify(userProfile, null, 2);
                 userData.displayName = userProfile.displayName;
                 userData.pictureUrl = userProfile.pictureUrl;
                 isDone = true;
-                document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+                document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
+                
+            }).then(() => {
+                document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
+                sendData('/users/register', userData);
                 clearLoader();
             });
         },
@@ -61,23 +66,10 @@ function initializeApp(data) {
         userId: data.context.userId,
         channelId: channelId
     }
-    
+    document.getElementById('debug1').textContent = JSON.stringify(userData, null, 2);
     return userData;
 }
 
-function getProfile(userData){
-    liff.getProfile().then((profile) => {
-        this.userData.displayName = profile.displayName;
-        this.userData.pictureUrl = profile.pictureUrl;
-        document.getElementById('roomidfield').textContent = profile.displayName;
-        document.getElementById('groupidfield').textContent = profile.pictureUrl;
-        document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
-        sendData('/users/register', userData);
-    });
-  
-    document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
-    return userData;
-}
 
 async function sendData(url, data){
     
