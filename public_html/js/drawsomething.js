@@ -85,18 +85,16 @@ async function sendData(url, data){
             data: data
         });
         //const res = await axios(path);      
-        document.getElementById('axiosfield').textContent = JSON.stringify(res, null, 2);
         return res;
     } catch (error) {
         //alert(error);
-        document.getElementById('axiosfield').textContent = JSON.stringify(error, null, 2);
         return Promise.reject(error);
     }
 
 }
 
 function renderLobby(res){
-    
+    document.getElementById('debug6').textContent = JSON.stringify(res, null, 2);
     res.channelList.forEach(element => {
         var markup = `<tr>
                         <th><img src="${element.pictureUrl}"></th>
