@@ -95,7 +95,7 @@ async function sendData(url, data){
 
 function renderLobby(res){
     document.getElementById('debug6').textContent = JSON.stringify(res, null, 2);
-    res.channelList.forEach(element => {
+    res.data.channelList.forEach(element => {
         var markup = `<tr>
                         <th><img src="${element.pictureUrl}"></th>
                         <td id="displayName">${element.displayName}</td>
