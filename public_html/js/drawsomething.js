@@ -4,15 +4,9 @@ const elements = {
 
 var userData;
 var isDone = false;
-renderLoader(elements.loadBody);
-//window.onload = function (e) {
-    /* renderLoader(elements.loadBody);
-    liff.init((data) => {
-        userData = initializeApp(data);
-    });
-    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-    alert(userData);
-    clearLoader(); */
+
+window.onload = function (e) {
+    renderLoader(elements.loadBody);
     liff.init(
         data => {
           // Now you can call LIFF API
@@ -36,7 +30,7 @@ renderLoader(elements.loadBody);
         }
     );
     
-//};
+};
 
 const elementStrings = {
     loader: 'loader'
