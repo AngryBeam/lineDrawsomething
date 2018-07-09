@@ -5,8 +5,8 @@ var userData;
 
 //window.onload = function (e) {
     renderLoader(elements.loadBody);
-    userData = liff.init((data) => {
-        return initializeApp(data);
+    liff.init((data) => {
+        userData = initializeApp(data);
     });
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
     alert(userData);
