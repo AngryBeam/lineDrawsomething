@@ -8,7 +8,7 @@ const elements = {
 var userData;
 var isDone = false;
 
-window.onload = function (e) {
+window.onload = async function (e) {
     renderLoader(elements.loadBody);
     liff.init(
         data => {
@@ -19,7 +19,7 @@ window.onload = function (e) {
             }).then(() => {
                 document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
            
-                sendData('/users/register', userData).then((res) => {
+                await sendData('/users/register', userData).then((res) => {
                     isDone = true;
                     document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
                     
@@ -95,6 +95,7 @@ async function sendData(url, data){
 }
 
 function renderLobby(res){
+    res = JSON.parse(res);
     res.channelList.forEach(element => {
         var markup = `<tr>
                         <th><img src="${element.pictureUrl}"></th>
