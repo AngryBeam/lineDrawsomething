@@ -95,7 +95,7 @@ async function sendData(url, data){
 }
 
 function renderLobby(res){
-    res = JSON.parse(res);
+    
     res.channelList.forEach(element => {
         var markup = `<tr>
                         <th><img src="${element.pictureUrl}"></th>
