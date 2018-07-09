@@ -21,7 +21,7 @@ window.onload = function (e) {
                     document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
                     clearLoader();
                 }).catch(function (e) {
-
+                    document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
                 });
                 
             }).catch(function (error) {
