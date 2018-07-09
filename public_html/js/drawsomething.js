@@ -3,7 +3,7 @@ const elements = {
 };
 var userData;
 
-window.onload = function (e) {
+//window.onload = function (e) {
     renderLoader(elements.loadBody);
     userData = liff.init((data) => {
         return initializeApp(data);
@@ -12,7 +12,7 @@ window.onload = function (e) {
     alert(userData);
     clearLoader();
 
-};
+//};
 
 const elementStrings = {
     loader: 'loader'
