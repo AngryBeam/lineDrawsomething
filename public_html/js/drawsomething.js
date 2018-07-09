@@ -5,8 +5,8 @@ var userData;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
-    liff.init((data) => {
-        initializeApp(data);
+    userData = liff.init((data) => {
+        return initializeApp(data);
     });
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
     
@@ -40,22 +40,26 @@ function initializeApp(data) {
     document.getElementById('roomidfield').textContent = data.context.roomId;
     document.getElementById('groupidfield').textContent = data.context.groupId;
     var channelId = data.context.utouId || data.context.roomId || data.context.groupId;
-    window.userData = {
+    userData = {
         language: data.language,
         viewtype: data.context.viewType,
         userId: data.context.userId,
         channelId: channelId
     }
     document.getElementById('debug1').textContent = JSON.stringify(userData, null, 2);
-    liff.getProfile().then((profile) => {
-        window.userData.displayName = profile.displayName;
-        window.userData.pictureUrl = profile.pictureUrl;
+    var profile = liff.getProfile().then((profile) => {
+        userData.displayName = profile.displayName;
+        userData.pictureUrl = profile.pictureUrl;
         document.getElementById('roomidfield').textContent = profile.displayName;
         document.getElementById('groupidfield').textContent = profile.pictureUrl;
         document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
         sendData('/users/register', userData);
+        return profile;
     });
+    userData.displayName = profile.displayName;
+    userData.pictureUrl = profile.pictureUrl;
     document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
+    return userData;
 }
 
 async function sendData(url, data){
