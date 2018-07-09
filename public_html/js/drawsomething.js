@@ -4,7 +4,7 @@ const elements = {
 
 var userData;
 var isDone = false;
-renderLoader(elements.loadBody);
+//renderLoader(elements.loadBody);
 //window.onload = function (e) {
     /* renderLoader(elements.loadBody);
     liff.init((data) => {
@@ -18,7 +18,8 @@ renderLoader(elements.loadBody);
           // Now you can call LIFF API
           //const userId = data.context.userId;
             userData = initializeApp(data);
-            liff.getProfile().then((userProfile) => {
+            //liff.getProfile().then((userProfile) => {
+            liff.getProfile().then(function (userProfile) {
                 document.getElementById('debugfield').textContent = JSON.stringify(userProfile, null, 2);
                 userData.displayName = userProfile.displayName;
                 userData.pictureUrl = userProfile.pictureUrl;
@@ -28,7 +29,9 @@ renderLoader(elements.loadBody);
             }).then(() => {
                 document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
                 sendData('/users/register', userData);
-                clearLoader();
+                //clearLoader();
+            }).catch(function (error) {
+                window.alert("Error getting profile: " + error);
             });
         },
         err => {
