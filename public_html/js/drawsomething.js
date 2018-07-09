@@ -4,7 +4,7 @@ const elements = {
 
 var userData;
 var isDone = false;
-renderLoader(elements.loadBody);
+//renderLoader(elements.loadBody);
 //window.onload = function (e) {
     /* renderLoader(elements.loadBody);
     liff.init((data) => {
@@ -24,9 +24,9 @@ renderLoader(elements.loadBody);
                 userData.pictureUrl = userProfile.pictureUrl;
                 isDone = true;
             }).then(() => {
-                
+                document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
                 sendData('/users/register', userData);
-                clearLoader();
+                //clearLoader();
             }).catch(function (error) {
                 window.alert("Error getting profile: " + error);
             });
