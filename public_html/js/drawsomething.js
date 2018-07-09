@@ -20,7 +20,6 @@ window.onload = function (e) {
             }).then(() => {
                 document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
                 sendData('/users/register', userData);
-                //clearLoader();
             }).catch(function (error) {
                 window.alert("Error getting profile: " + error);
             });
@@ -28,7 +27,9 @@ window.onload = function (e) {
         err => {
           // LIFF initialization failed
         }
-    );
+    ).then(() =>{
+        clearLoader();
+    });
     
 };
 
@@ -77,6 +78,7 @@ async function sendData(url, data){
         document.getElementById('axiosfield').textContent = JSON.stringify(res, null, 2);
     } catch (error) {
         //alert(error);
+        document.getElementById('axiosfield').textContent = JSON.stringify(error, null, 2);
     }
 }
 
