@@ -173,7 +173,7 @@ app.post('/users/register', (req, res) => {
  
     try {
       User.checkUserId(body.userId, body.channelId).then((haveUser) =>{
-        console.log(`Checking UserID is already exist: ${haveUser}`);
+        console.log(`Checking UserID is already exist: ${haveUser.length}`);
         if(haveUser.length < 1){
           console.log(`New User Insert.`);
           var user = new User(body);

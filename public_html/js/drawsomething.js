@@ -22,10 +22,11 @@ window.onload = function (e) {
                 sendData('/users/register', userData).then((res) => {
                     isDone = true;
                     document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
-                    clearLoader();
+                    
                     elements.lobby.style.display = 'block';
                     elements.lineUserData.style.display = 'none';
-                    //elements.lobby.insertAdjacentHTML('beforeend', markup);
+                    renderLobby(res);
+                    clearLoader();
                 }).catch(function (e) {
                     document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
                 });
@@ -93,3 +94,12 @@ async function sendData(url, data){
 
 }
 
+function renderLobby(res){
+    res.channelList.forEach(element => {
+        var markup = `<tr>
+                        <th><img src="${element.pictureUrl}"></th>
+                        <td id="displayName">${element.displayName}</td>
+                    </tr>`;
+        elements.lobby.insertAdjacentHTML('beforeend', markup);
+    });
+}
