@@ -19,6 +19,8 @@ const elements = {
             liff.getProfile().then((profile) => {
                 this.userData.displayName = profile.displayName;
                 this.userData.pictureUrl = profile.pictureUrl;
+                document.getElementById('debug2').textContent = JSON.stringify(this, null, 2);
+                document.getElementById('debug3').textContent = JSON.stringify(window, null, 2);
             });
             document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
         },
