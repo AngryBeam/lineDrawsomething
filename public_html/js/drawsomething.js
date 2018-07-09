@@ -15,13 +15,17 @@ var userData;
         data => {
           // Now you can call LIFF API
           //const userId = data.context.userId;
-          userData = initializeApp(data);
-          userData = getProfile(userData);
+            userData = initializeApp(data);
+            liff.getProfile().then((profile) => {
+                userData.displayName = profile.displayName;
+                userData.pictureUrl = profile.pictureUrl;
+            });
         },
         err => {
           // LIFF initialization failed
         }
       );
+    document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
 //};
 
 const elementStrings = {
@@ -62,8 +66,8 @@ function initializeApp(data) {
 
 function getProfile(userData){
     liff.getProfile().then((profile) => {
-        userData.displayName = profile.displayName;
-        userData.pictureUrl = profile.pictureUrl;
+        this.userData.displayName = profile.displayName;
+        this.userData.pictureUrl = profile.pictureUrl;
         document.getElementById('roomidfield').textContent = profile.displayName;
         document.getElementById('groupidfield').textContent = profile.pictureUrl;
         document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
@@ -72,7 +76,6 @@ function getProfile(userData){
     userData.displayName = profile.displayName;
     userData.pictureUrl = profile.pictureUrl;
     document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
-    document.getElementById('debug4').textContent = JSON.stringify(profile, null, 2);
     return userData;
 }
 
