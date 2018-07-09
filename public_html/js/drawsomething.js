@@ -4,6 +4,7 @@ const elements = {
 
 var userData;
 var isDone = false;
+renderLoader(elements.loadBody);
 //window.onload = function (e) {
     /* renderLoader(elements.loadBody);
     liff.init((data) => {
@@ -21,14 +22,14 @@ var isDone = false;
                 userData.displayName = userProfile.displayName;
                 userData.pictureUrl = userProfile.pictureUrl;
                 isDone = true;
+                document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+                clearLoader();
             });
         },
         err => {
           // LIFF initialization failed
         }
-      ).then(() => {
-        document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-      });
+    );
     
 //};
 
