@@ -180,6 +180,7 @@ app.post('/users/register', (req, res) => {
               console.log(`Unable to save user: ${e}`);
           });
         }
+      }).then(() =>{
         User.findByChannelId(body.channelId).then((channelList) => {
           res.send({channelList});
         });
