@@ -4,14 +4,24 @@ const elements = {
 var userData;
 
 //window.onload = function (e) {
-    renderLoader(elements.loadBody);
+    /* renderLoader(elements.loadBody);
     liff.init((data) => {
         userData = initializeApp(data);
     });
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
     alert(userData);
-    clearLoader();
-
+    clearLoader(); */
+    liff.init(
+        data => {
+          // Now you can call LIFF API
+          //const userId = data.context.userId;
+          userData = initializeApp(data);
+          userData = getProfile(userData);
+        },
+        err => {
+          // LIFF initialization failed
+        }
+      );
 //};
 
 const elementStrings = {
@@ -47,14 +57,17 @@ function initializeApp(data) {
         channelId: channelId
     }
     document.getElementById('debug1').textContent = JSON.stringify(userData, null, 2);
-    var profile = liff.getProfile().then((profile) => {
+    return userData;
+}
+
+function getProfile(userData){
+    liff.getProfile().then((profile) => {
         userData.displayName = profile.displayName;
         userData.pictureUrl = profile.pictureUrl;
         document.getElementById('roomidfield').textContent = profile.displayName;
         document.getElementById('groupidfield').textContent = profile.pictureUrl;
         document.getElementById('debug2').textContent = JSON.stringify(userData, null, 2);
         sendData('/users/register', userData);
-        return profile;
     });
     userData.displayName = profile.displayName;
     userData.pictureUrl = profile.pictureUrl;
