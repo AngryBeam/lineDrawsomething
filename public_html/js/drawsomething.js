@@ -9,7 +9,7 @@ window.onload = function (e) {
         return initializeApp(data);
     });
     document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
-    
+    alert(userData);
     clearLoader();
 
 };
@@ -59,6 +59,7 @@ function initializeApp(data) {
     userData.displayName = profile.displayName;
     userData.pictureUrl = profile.pictureUrl;
     document.getElementById('debug3').textContent = JSON.stringify(userData, null, 2);
+    document.getElementById('debug4').textContent = JSON.stringify(profile, null, 2);
     return userData;
 }
 
@@ -73,7 +74,7 @@ async function sendData(url, data){
         //const res = await axios(path);      
         document.getElementById('axiosfield').textContent = JSON.stringify(res, null, 2);
     } catch (error) {
-        alert(error);
+        //alert(error);
     }
 }
 
