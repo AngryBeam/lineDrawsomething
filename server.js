@@ -173,6 +173,7 @@ app.post('/users/register', (req, res) => {
  
     try {
       User.checkUserId(body.userId, body.channelId).then((haveUser) =>{
+        console.log(`Checking UserID is already exist: ${haveUser}`);
         if(!haveUser){
           var user = new User(body);
           user.save().catch((e) => {
