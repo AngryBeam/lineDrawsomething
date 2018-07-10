@@ -5,7 +5,7 @@ const elements = {
     gamePlay : document.querySelector('#gamePlay'),
     newQuiz : document.querySelector('#newQuiz'),
     saveQuiz : document.querySelector('#saveQuiz'),
-    deleteDrawing : document.querySelector('deleteDrawing'),
+    deleteDrawing : document.querySelector('#deleteDrawing'),
     newDrawing : document.querySelector('#newDrawing')
 };
 

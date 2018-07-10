@@ -56,3 +56,25 @@ button {
     height: 22px;
     background: url('images/pointer.png') no-repeat -4px 0;
 }
+
+.gradient-pattern {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 100%;
+    border: none;
+    font: normal 0.5px/normal Arial, Helvetica, sans-serif;
+    color: rgba(255,255,255,1);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: -webkit-linear-gradient(135deg, rgba(0,0,0,0) 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 75%, rgba(255,255,255,0.2) 75%), -webkit-linear-gradient(45deg, rgba(0,0,0,0) 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 75%, rgba(255,255,255,0.2) 75%), rgb(0, 153, 151);
+    background: -moz-linear-gradient(-45deg, rgba(0,0,0,0) 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 75%, rgba(255,255,255,0.2) 75%), -moz-linear-gradient(45deg, rgba(0,0,0,0) 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 75%, rgba(255,255,255,0.2) 75%), rgb(0, 153, 151);
+    background: linear-gradient(-45deg, rgba(0,0,0,0) 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 75%, rgba(255,255,255,0.2) 75%), linear-gradient(45deg, rgba(0,0,0,0) 25%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 75%, rgba(255,255,255,0.2) 75%), rgb(0, 153, 151);
+    background-position: auto auto;
+    -webkit-background-origin: padding-box;
+    background-origin: padding-box;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-background-size: 200em 200em;
+    background-size: 200em 200em;
+  }
