@@ -75,7 +75,7 @@ function initializeApp(data) {
         channelId: channelId,
         displayName: '',
         pictureUrl: '',
-        gamePlay: []
+        gamePlay: {}
     }
     
     return userData;
@@ -129,7 +129,7 @@ elements.saveQuiz.addEventListener("click", () => {
         data: replayData
     }
     console.log(markup);
-    userData.gamePlay = userData.gamePlay.concat(markup);
+    userData.gamePlay = markup;
     sendData('/users/save', userData).then((res) => {
         clearLoader();
         quizName = null;

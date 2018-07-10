@@ -208,20 +208,14 @@ app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authentica
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     
     try {
-      User.checkUserId(body.userId, body.channelId).then((player) =>{
-        var temp = player.gamePlay
-        temp.push(body.gamePlay);
-        player.gamePlay = temp;
-        
+      //User.checkUserId(body.userId, body.channelId).then((player) =>{
+      User.findOneAndUpdate({ userId: body.userId, channelId: body.channelId}, { $push: {gamePlay: body.gamePlay}}).then(() => {
         console.log('Updating Player Game Play.');
-        console.log(body.gamePlay);
+        console.log(JSON.stringify(body, null, 2));
       }).catch ((e) => {
         console.log(`Unable to update user: ${e}`);
       });
-      /* 
-      var condition = { userId: body.userId, channelId: body.channelId}
-      var updator = { gamePlay: body.gamePlay}
-      User.findOneAndUpdate(condition, updator); */
+      
     } catch (e) {
       res.send(e);
     }
