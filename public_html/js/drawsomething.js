@@ -25,10 +25,8 @@ window.onload = function (e) {
            
                 sendData('/users/register', userData).then((res) => {
                     isDone = true;
-                    
-                    
                     elements.lobby.style.display = 'block';
-                    
+                    elements.newQuiz.style.display = 'block';
                     renderLobby(res);
                     clearLoader();
                 }).catch(function (e) {
@@ -52,7 +50,7 @@ const elementStrings = {
 
 const renderLoader = parent => {
     const loader = `
-        <div class="${elementStrings.loader}">
+        <div class="${elementStrings.loader}" align="center">
             <img src="images/Ellipsis-1s-200px.gif">
         </div>
     `;
