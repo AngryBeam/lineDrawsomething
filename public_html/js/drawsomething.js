@@ -111,7 +111,7 @@ elements.newQuiz.addEventListener("click", () => {
         //process to gameDrawing
         elements.lineUserData.style.display = "none";
         elements.lobby.style.display = "none";
-        elements.gamePlay.style.display = "block";
+        //elements.gamePlay.style.display = "block";
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
     }
