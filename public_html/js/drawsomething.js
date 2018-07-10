@@ -30,7 +30,7 @@ window.onload = function (e) {
                     renderLobby(res);
                     clearLoader();
                 }).catch(function (e) {
-                    
+                    alert(e);
                 });
                 
             }).catch(function (error) {
@@ -135,9 +135,10 @@ elements.saveQuiz.addEventListener("click", () => {
         elements.newQuiz.style.display = "block";
         elements.saveQuiz.style.display = "none";
         elements.gamePlay.style.display = "none";
+        //elements.lobbyTable.parentElement.removeChild(elements.lobbyTable);
+        elements.lobbyTable.innerHTML = '';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }).then(() => {
-        
         sendData('/users/me', userData).then((res) => {
             renderLobby(res);
             clearLoader();
