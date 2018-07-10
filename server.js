@@ -159,18 +159,7 @@ app.post('/todos', authenticate, (req, res) => {
 
   
 app.post('/users/register', (req, res) => {
-    console.log('Incoming Data');
-    console.log(JSON.stringify(req.body, null ,2));
     var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
-    /* var user = new User(body);
-    user.save().then(() => {
-      return User.findByChannelId(body.channelId);
-    }).then((channelList) => {
-      res.send({channelList});
-    }).catch((e) => {
-      res.status(400).send(e);
-    }) */
- 
     try {
       User.checkUserId(body.userId, body.channelId).then((haveUser) =>{
         console.log(`Checking UserID is already exist: ${haveUser.length}`);
@@ -193,11 +182,11 @@ app.post('/users/register', (req, res) => {
   });
 
 app.post('/users/me', (req, res) => {    //Using a middle ware for authenticate
-  var channelId = _.pick(req.body, ['channelId']);
+  var body = _.pick(req.body, ['channelId']);
   console.log(`User/me Incomming data:`);
   console.log(JSON.stringify(req.body, null ,2));
     try {
-      User.findByChannelId(channelId).then((channelList) => {
+      User.findByChannelId(body.channelId).then((channelList) => {
         res.send({channelList});
       }).catch((e) =>{
         console.log(`Error -> User/me: ${e}`);
@@ -208,22 +197,17 @@ app.post('/users/me', (req, res) => {    //Using a middle ware for authenticate
   });
 
   app.post('/users/save', (req, res) => {    //Using a middle ware for authenticate
-    console.log(JSON.stringify(req.body, null ,2));
     var body = _.pick(req.body, ['userId', 'channelId', 'gamePlay']);
-    
     try {
       //User.checkUserId(body.userId, body.channelId).then((player) =>{
       User.findOneAndUpdate({ userId: body.userId, channelId: body.channelId}, { $push: {gamePlay: body.gamePlay}}).then(() => {
-        console.log('Updating Player Game Play.');
-        console.log(JSON.stringify(body, null, 2));
+        res.send('ok');
       }).catch ((e) => {
         console.log(`Unable to update user: ${e}`);
       });
-      
     } catch (e) {
       res.send(e);
     }
-    res.send('ok');
   });
 
 
