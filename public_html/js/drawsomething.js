@@ -120,8 +120,8 @@ elements.newQuiz.addEventListener("click", () => {
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
-    userData.gamePlay = userData.gamePlay.concat([replayData]);
-    sendData('/users/save', gameData).then((res) => {
+    userData.gamePlay = replayData;
+    sendData('/users/save', userData).then((res) => {
         clearLoader();
     }).catch(function (e) {
         clearLoader();
@@ -250,7 +250,7 @@ canvas.on('mouseup mouseleave', function(e) {
 // On touch end
 canvas.on('touchend touchleave touchcancel', function(e) {
     drawing = false;
-    alert(`LastEmit: ${lastEmit} , Now: ${$.now()}`);
+    alert(JSON.stringify(replayData, null, 2));
     if(deleting){
         line_thickness = 7;
         line_colour = "blue";
