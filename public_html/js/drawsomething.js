@@ -224,7 +224,6 @@ canvas.on('touchmove', function(e) {
             'id': id
         });
         lastEmit = $.now();
-        alert(`Last Emit: ${lastEmit} , Now: ${$.now()}`);
     }
     
     // Draw a line for the current user's movement
