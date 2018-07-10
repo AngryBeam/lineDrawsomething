@@ -137,8 +137,8 @@ elements.saveQuiz.addEventListener("click", () => {
         elements.gamePlay.style.display = "none";
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }).then(() => {
-        alert(userData.channelId);
-        sendData('/users/me', userData.channelId).then((res) => {
+        
+        sendData('/users/me', userData).then((res) => {
             renderLobby(res);
             clearLoader();
         }).catch(function (e) {
