@@ -112,14 +112,14 @@ elements.newQuiz.addEventListener("click", () => {
         elements.lobby.style.display = "none";
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
-        userData.quizName = quizName;
+        
     }
 });
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
-    //userData.quizName = quizName;
-    userData.gamePlay = replayData;
+    userData.gamePlay.id.quizName = quizName;
+    userData.gamePlay.id.data = replayData;
     alert('Sending data.');
     sendData('/users/save', userData).then((res) => {
         clearLoader();
