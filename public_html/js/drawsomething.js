@@ -120,10 +120,7 @@ elements.newQuiz.addEventListener("click", () => {
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
-    var gameData = {
-        userData,
-        replayData
-    }
+    userData.gamePlay = userData.gamePlay.concat([replayData]);
     sendData('/users/save', gameData).then((res) => {
         clearLoader();
     }).catch(function (e) {
@@ -228,7 +225,7 @@ canvas.on('touchmove', function(e) {
             'isLineUser': isLineUser
         });
         lastEmit = $.now();
-        alert(replayData);
+        
     }
     
     // Draw a line for the current user's movement
@@ -253,6 +250,7 @@ canvas.on('mouseup mouseleave', function(e) {
 // On touch end
 canvas.on('touchend touchleave touchcancel', function(e) {
     drawing = false;
+    alert(`LastEmit: ${lastEmit} , Now: ${$.now()}`);
     if(deleting){
         line_thickness = 7;
         line_colour = "blue";
