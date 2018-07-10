@@ -9,6 +9,7 @@ const elements = {
 
 var userData;
 var isDone = false;
+var quizName;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
@@ -71,7 +72,10 @@ function initializeApp(data) {
         language: data.language,
         viewtype: data.context.viewType,
         userId: data.context.userId,
-        channelId: channelId
+        channelId: channelId,
+        displayName: '',
+        pictureUrl: '',
+        gamePlay: []
     }
     
     return userData;
@@ -106,21 +110,25 @@ function renderLobby(res){
 }
 
 elements.newQuiz.addEventListener("click", () => {
-    var quizName = prompt('What your quiz?');
+    quizName = prompt('What your quiz?');
     if(quizName != null){
         //process to gameDrawing
         elements.lobby.style.display = "none";
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
-        
+        //console.log(quizName);
     }
 });
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
-    //userData.gamePlay.id.quiz = quizName;
-    userData.gamePlay.id.data = replayData;
-    alert(quizName);
+    var markup = {
+        id,
+        quiz: quizName,
+        data: replayData
+    }
+    console.log(markup);
+    userData.gamePlay = userData.gamePlay.concat(markup);
     sendData('/users/save', userData).then((res) => {
         clearLoader();
         quizName = null;

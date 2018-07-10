@@ -207,7 +207,8 @@ app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authentica
     console.log(JSON.stringify(req.body, null ,2));
     /* var body = _.pick(req.body, ['userId', 'channelId', 'displayName', 'pictureUrl']);
     try {
-      var condition = { userId}
+      var condition = { userId: body.userId, channelId: body.channelId}
+      var updator = { gamePlay: body.gamePlay}
       User.findOneAndUpdate(condition, updator);
     } catch (e) {
       res.send(e);
