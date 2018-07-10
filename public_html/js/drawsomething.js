@@ -103,7 +103,7 @@ function renderLobby(res){
     res.data.channelList.forEach(element => {
         var markup = `<tr>
                         <th><img src="${element.pictureUrl}"></th>
-                        <td id="displayName">${element.displayName}</td>
+                        <td id="displayName">${element.displayName} : ${res.data.channelList.gamePlay.length} games</td>
                     </tr>`;
         elements.lobbyTable.insertAdjacentHTML('beforeend', markup);
     });

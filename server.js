@@ -183,8 +183,6 @@ app.post('/users/register', (req, res) => {
 
 app.post('/users/me', (req, res) => {    //Using a middle ware for authenticate
   var body = _.pick(req.body, ['channelId']);
-  console.log(`User/me Incomming data:`);
-  console.log(JSON.stringify(req.body, null ,2));
     try {
       User.findByChannelId(body.channelId).then((channelList) => {
         res.send({channelList});
