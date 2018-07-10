@@ -3,7 +3,9 @@ const elements = {
     lineUserData : document.querySelector('#lineUserData'),
     lobby : document.querySelector('#lobby'),
     lobbyTable: document.querySelector('#lobbyTable'),
-    gamePlay : document.querySelector('#gamePlay')
+    gamePlay : document.querySelector('#gamePlay'),
+    newQuiz : document.querySelector('#newQuiz'),
+    saveQuiz : document.querySelector('#saveQuiz')
 };
 
 var userData;
@@ -102,3 +104,154 @@ function renderLobby(res){
         elements.lobbyTable.insertAdjacentHTML('beforeend', markup);
     });
 }
+
+elements.newQuiz.addEventListener("click", () => {
+    var quizName = prompt('What your quiz?');
+    if(quizName != null){
+        //process to gameDrawing
+        elements.lineUserData.style.display = "none";
+        elements.lobby.style.display = "none";
+        elements.gamePlay.style.display = "block";
+        elements.newQuiz.style.display = "none";
+        elements.saveQuiz.style.display = "block";
+    }
+});
+
+elements.saveQuiz.addEventListener("click", () => {
+    renderLoader(elements.loadBody);
+    var gameData = {
+        userData,
+        replayData
+    }
+    sendData('/users/save', gameData).then((res) => {
+        clearLoader();
+    }).catch(function (e) {
+        //document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
+    });
+})
+// Configuration
+var line_thickness = 7;
+var line_colour = "blue";
+
+// Variables
+var canvas = $('#paper');
+var ctx = canvas[0].getContext('2d');
+var id = Math.round($.now() * Math.random()); // Generate a unique ID
+var drawing = false; // A flag for drawing activity
+var touchUsed = false; // A flag to figure out if touch was used
+var deleting = false;
+var clients = {};
+var cursors = {};
+var prev = {}; // Previous coordinates container
+var lastEmit = $.now();
+var replayData = [];
+
+// Drawing helper function
+function drawLine(fromx, fromy, tox, toy)
+{
+    ctx.lineWidth = line_thickness;
+    ctx.strokeStyle = line_colour;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(fromx, fromy);
+    ctx.lineTo(tox, toy);
+    ctx.stroke();
+}
+
+// On mouse down
+canvas.on('mousedown', function(e) {
+    replayData.push({
+        'x': e.pageX,
+        'y': e.pageY,
+        'touch': false,
+        'drawing': drawing,
+        'id': id
+    });
+    e.preventDefault();
+    drawing = true;
+    prev.x = e.pageX;
+    prev.y = e.pageY;
+});
+
+// On touch start
+canvas.on('touchstart', function(e) {
+    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+    drawing = true;
+    prev.x = touch.pageX;
+    prev.y = touch.pageY;
+});
+
+// On mouse move
+canvas.on('mousemove', function(e) {
+    // Emit the event to the server
+    if ($.now() - lastEmit > 30)
+    {
+        replayData.push({
+            'x': e.pageX,
+            'y': e.pageY,
+            'touch': false,
+            'drawing': drawing,
+            'id': id          
+        });
+        lastEmit = $.now();
+    }
+    
+    // Draw a line for the current user's movement
+    if (drawing)
+    {
+        drawLine(prev.x, prev.y, e.pageX, e.pageY);
+        prev.x = e.pageX;
+        prev.y = e.pageY;
+    }
+});
+
+// On touch move
+canvas.on('touchmove', function(e) {
+    e.preventDefault();
+    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+
+    // Emit the event to the server
+    if ($.now() - lastEmit > 10)
+    {
+        replayData.push({
+            'x': touch.pageX,
+            'y': touch.pageY,
+            'startX': prev.x,
+            'startY': prev.y,
+            'touch': true,
+            'drawing': drawing,
+            'id': id,
+            'userData': userData,
+            'isLineUser': isLineUser
+        });
+        lastEmit = $.now();
+    }
+    
+    // Draw a line for the current user's movement
+    if (drawing)
+    {
+        drawLine(prev.x, prev.y, touch.pageX, touch.pageY);
+        prev.x = touch.pageX;
+        prev.y = touch.pageY;
+    }
+});
+
+// On mouse up
+canvas.on('mouseup mouseleave', function(e) {
+    drawing = false;
+    if(deleting){
+        line_thickness = 7;
+        line_colour = "blue";
+        deleting = false;
+    }
+});
+
+// On touch end
+canvas.on('touchend touchleave touchcancel', function(e) {
+    drawing = false;
+    if(deleting){
+        line_thickness = 7;
+        line_colour = "blue";
+        deleting = false;
+    }
+});

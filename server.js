@@ -203,6 +203,10 @@ app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authentica
     }
   });
 
+  app.get('/users/save', (req, res) => {    //Using a middle ware for authenticate
+    console.log(JSON.stringify(req.body, null ,2));
+  });
+
 
 
   //====================================================================================
