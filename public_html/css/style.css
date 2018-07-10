@@ -44,7 +44,7 @@ button {
 }
 
 #paper {
-    background-color: #ffffff;
+    background-color: #000000;
     border-radius: 6px;
 }
 #cursors {
@@ -54,5 +54,5 @@ button {
     position: absolute;
     width: 15px;
     height: 22px;
-    background: url('pointer.png') no-repeat -4px 0;
+    background: url('images/pointer.png') no-repeat -4px 0;
 }
