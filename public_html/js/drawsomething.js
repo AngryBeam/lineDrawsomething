@@ -1,6 +1,5 @@
 const elements = {
     loadBody: document.querySelector('#loadBody'),
-    
     lobby : document.querySelector('#lobby'),
     lobbyTable: document.querySelector('#lobbyTable'),
     gamePlay : document.querySelector('#gamePlay'),
@@ -212,7 +211,7 @@ canvas.on('mousemove', function(e) {
 canvas.on('touchmove', function(e) {
     e.preventDefault();
     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-
+    alert(JSON.stringify(replayData, null, 2));
     // Emit the event to the server
     if ($.now() - lastEmit > 10)
     {
@@ -253,7 +252,6 @@ canvas.on('mouseup mouseleave', function(e) {
 // On touch end
 canvas.on('touchend touchleave touchcancel', function(e) {
     drawing = false;
-    alert(JSON.stringify(replayData, null, 2));
     if(deleting){
         line_thickness = 7;
         line_colour = "blue";
