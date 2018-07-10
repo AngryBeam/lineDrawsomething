@@ -112,6 +112,7 @@ elements.newQuiz.addEventListener("click", () => {
         elements.lobby.style.display = "none";
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
+        userData.quizName = quizName;
     }
 });
 
