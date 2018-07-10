@@ -148,6 +148,7 @@ elements.saveQuiz.addEventListener("click", () => {
         sendData('/users/me', userData).then((res) => {
             renderLobby(res);
             clearLoader();
+            liffAnnounce();
         }).catch(function (e) {
             clearLoader();
             alert(e);
@@ -169,6 +170,15 @@ elements.newDrawing.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
     replayData = [];
 })
+
+function liffAnnounce(){
+    liff.sendMessages([{
+        type: 'text',
+        text: `${userData.displayName} ได้สร้างเกมส์ทายคำจากภาพ. มาลองเล่นกัน กดเลย line://app/1589090105-59pDN9ap`
+    }]).catch(function (error) {
+        window.alert("Error sending message: " + error);
+    });
+}
 // Configuration
 var line_thickness = 7;
 var line_colour = "blue";
