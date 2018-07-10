@@ -118,9 +118,9 @@ elements.newQuiz.addEventListener("click", () => {
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
-    userData.gamePlay.id.quiz = quizName;
+    //userData.gamePlay.id.quiz = quizName;
     userData.gamePlay.id.data = replayData;
-    alert('Sending data.');
+    alert(quizName);
     sendData('/users/save', userData).then((res) => {
         clearLoader();
         quizName = null;
