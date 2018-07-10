@@ -110,7 +110,7 @@ elements.newQuiz.addEventListener("click", () => {
     var quizName = prompt('What your quiz?');
     if(quizName != null){
         //process to gameDrawing
-        elements.lineUserData.style.display = "none";
+        
         elements.lobby.style.display = "none";
         //elements.gamePlay.style.display = "block";
         elements.newQuiz.style.display = "none";
