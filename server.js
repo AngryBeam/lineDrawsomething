@@ -209,9 +209,11 @@ app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authentica
     
     try {
       User.checkUserId(body.userId, body.channelId).then((player) =>{
-        player.gamePlay = player.gamePlay.concat(body.gamePlay);
+        player.gamePlay.push(body.gamePlay);
         console.log('Updating Player Game Play.');
         console.log(body.gamePlay);
+      }).catch ((e) => {
+        console.log(`Unable to update user: ${e}`);
       });
       /* 
       var condition = { userId: body.userId, channelId: body.channelId}

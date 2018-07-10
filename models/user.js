@@ -27,9 +27,7 @@ var UserSchema = new mongoose.Schema({
   quizName: {
     type: String
   },
-  gamePlay: {
-    type: String
-  }
+  gamePlay: []
 
 });
 
