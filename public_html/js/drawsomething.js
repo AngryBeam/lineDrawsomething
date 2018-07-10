@@ -119,6 +119,7 @@ elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
     userData.quizName = quizName;
     userData.gamePlay = replayData;
+    alert('Sending data.');
     sendData('/users/save', userData).then((res) => {
         clearLoader();
         quizName = null;
@@ -209,7 +210,7 @@ canvas.on('mousemove', function(e) {
 canvas.on('touchmove', function(e) {
     e.preventDefault();
     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-    alert(`Last Emit: ${lastEmit} , Now: ${$.now()}`);
+    
     // Emit the event to the server
     if ($.now() - lastEmit > 10)
     {
@@ -220,12 +221,10 @@ canvas.on('touchmove', function(e) {
             'startY': prev.y,
             'touch': true,
             'drawing': drawing,
-            'id': id,
-            'userData': userData,
-            'isLineUser': isLineUser
+            'id': id
         });
         lastEmit = $.now();
-        
+        alert(`Last Emit: ${lastEmit} , Now: ${$.now()}`);
     }
     
     // Draw a line for the current user's movement
