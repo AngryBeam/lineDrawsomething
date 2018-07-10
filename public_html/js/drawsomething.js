@@ -127,6 +127,7 @@ elements.saveQuiz.addEventListener("click", () => {
     sendData('/users/save', gameData).then((res) => {
         clearLoader();
     }).catch(function (e) {
+        clearLoader();
         //document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
     });
 })
@@ -180,7 +181,7 @@ canvas.on('touchstart', function(e) {
     drawing = true;
     prev.x = touch.pageX;
     prev.y = touch.pageY;
-    alert(drawing);
+    
 });
 
 // On mouse move
@@ -227,6 +228,7 @@ canvas.on('touchmove', function(e) {
             'isLineUser': isLineUser
         });
         lastEmit = $.now();
+        alert(replayData);
     }
     
     // Draw a line for the current user's movement
