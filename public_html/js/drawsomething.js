@@ -128,16 +128,24 @@ elements.saveQuiz.addEventListener("click", () => {
         quiz: quizName,
         data: replayData
     }
-    console.log(markup);
+    
     userData.gamePlay = markup;
     sendData('/users/save', userData).then((res) => {
-        clearLoader();
         quizName = null;
         replayData = [];
         elements.lobby.style.display = "block";
         elements.newQuiz.style.display = "block";
         elements.saveQuiz.style.display = "none";
         elements.gamePlay.style.display = "none";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }).then(() => {
+        sendData('/users/me', userData.channelId).then((res) => {
+            renderLobby(res);
+            clearLoader();
+        }).catch(function (e) {
+            clearLoader();
+            alert(e);
+        });
     }).catch(function (e) {
         clearLoader();
         alert(e);

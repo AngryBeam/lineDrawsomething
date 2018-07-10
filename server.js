@@ -192,10 +192,10 @@ app.post('/users/register', (req, res) => {
 
   });
 
-app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authenticate
-    var id = req.params.id;
+app.post('/users/me', (req, res) => {    //Using a middle ware for authenticate
+  var channelId = _.pick(req.body, ['channelId']);
     try {
-      User.findByChannelId(id).then((channelList) => {
+      User.findByChannelId(channelId).then((channelList) => {
         res.send({channelList});
       });
     } catch (e) {
