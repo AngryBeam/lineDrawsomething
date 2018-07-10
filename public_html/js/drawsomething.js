@@ -116,6 +116,7 @@ elements.newQuiz.addEventListener("click", () => {
         elements.lobby.style.display = "none";
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
+        elements.gamePlay.style.display = "block";
         //console.log(quizName);
     }
 });
@@ -133,6 +134,10 @@ elements.saveQuiz.addEventListener("click", () => {
         clearLoader();
         quizName = null;
         replayData = [];
+        elements.lobby.style.display = "block";
+        elements.newQuiz.style.display = "block";
+        elements.saveQuiz.style.display = "none";
+        elements.gamePlay.style.display = "none";
     }).catch(function (e) {
         clearLoader();
         alert(e);
