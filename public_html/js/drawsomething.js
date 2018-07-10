@@ -137,7 +137,7 @@ elements.saveQuiz.addEventListener("click", () => {
         elements.gamePlay.style.display = "none";
         //elements.lobbyTable.parentElement.removeChild(elements.lobbyTable);
         elements.lobbyTable.innerHTML = '';
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
     }).then(() => {
         sendData('/users/me', userData).then((res) => {
             renderLobby(res);
