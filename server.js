@@ -209,7 +209,10 @@ app.get('/users/me/:id', (req, res) => {    //Using a middle ware for authentica
     
     try {
       User.checkUserId(body.userId, body.channelId).then((player) =>{
-        player.gamePlay.push(body.gamePlay);
+        var temp = player.gamePlay
+        temp.push(body.gamePlay);
+        player.gamePlay = temp;
+        
         console.log('Updating Player Game Play.');
         console.log(body.gamePlay);
       }).catch ((e) => {
