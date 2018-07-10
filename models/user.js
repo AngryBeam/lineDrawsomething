@@ -24,7 +24,12 @@ var UserSchema = new mongoose.Schema({
       type: String,
       required: true
   },
-  
+  quizName: {
+    type: String
+  },
+  gamePlay: {
+    type: String
+  }
 
 });
 

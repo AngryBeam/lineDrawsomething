@@ -117,8 +117,8 @@ elements.newQuiz.addEventListener("click", () => {
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
-    userData.quizName = quizName;
-    userData.gamePlay = replayData;
+    //userData.quizName = quizName;
+    //userData.gamePlay = replayData;
     alert('Sending data.');
     sendData('/users/save', userData).then((res) => {
         clearLoader();
@@ -126,6 +126,7 @@ elements.saveQuiz.addEventListener("click", () => {
         replayData = [];
     }).catch(function (e) {
         clearLoader();
+        alert(e);
         //document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
     });
 })
