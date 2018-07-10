@@ -1,6 +1,6 @@
 const elements = {
     loadBody: document.querySelector('#loadBody'),
-    lineUserData : document.querySelector('#lineUserData'),
+    
     lobby : document.querySelector('#lobby'),
     lobbyTable: document.querySelector('#lobbyTable'),
     gamePlay : document.querySelector('#gamePlay'),
@@ -13,7 +13,7 @@ var isDone = false;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
-    elements.lineUserData.style.display = "none";
+    
     liff.init(
         data => {
             userData = initializeApp(data);
@@ -51,17 +51,17 @@ const elementStrings = {
 };
 
 const renderLoader = parent => {
-    const loader = `
+    /* const loader = `
         <div class="${elementStrings.loader}">
             <img src="images/Ellipsis-1s-200px.gif">
         </div>
     `;
-    parent.insertAdjacentHTML('afterbegin', loader);
+    parent.insertAdjacentHTML('afterbegin', loader); */
 };
 
 const clearLoader = () => {
-    const loader = document.querySelector(`.${elementStrings.loader}`);
-    if (loader) loader.parentElement.removeChild(loader);
+    /* const loader = document.querySelector(`.${elementStrings.loader}`);
+    if (loader) loader.parentElement.removeChild(loader); */
 };
 
 function initializeApp(data) {
@@ -120,9 +120,12 @@ elements.newQuiz.addEventListener("click", () => {
 
 elements.saveQuiz.addEventListener("click", () => {
     renderLoader(elements.loadBody);
+    userData.quizName = quizName;
     userData.gamePlay = replayData;
     sendData('/users/save', userData).then((res) => {
         clearLoader();
+        quizName = null;
+        replayData = [];
     }).catch(function (e) {
         clearLoader();
         //document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
