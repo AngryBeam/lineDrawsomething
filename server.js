@@ -194,9 +194,13 @@ app.post('/users/register', (req, res) => {
 
 app.post('/users/me', (req, res) => {    //Using a middle ware for authenticate
   var channelId = _.pick(req.body, ['channelId']);
+  console.log(`User/me Incomming data:`);
+  console.log(JSON.stringify(req.body, null ,2));
     try {
       User.findByChannelId(channelId).then((channelList) => {
         res.send({channelList});
+      }).catch((e) =>{
+        console.log(`Error -> User/me: ${e}`);
       });
     } catch (e) {
       res.send(e);
