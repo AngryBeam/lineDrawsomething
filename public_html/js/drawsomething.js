@@ -13,6 +13,7 @@ var isDone = false;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
+    elements.lineUserData.style.display = "none";
     liff.init(
         data => {
             userData = initializeApp(data);
@@ -20,18 +21,18 @@ window.onload = function (e) {
                 userData.displayName = userProfile.displayName;
                 userData.pictureUrl = userProfile.pictureUrl;
             }).then(() => {
-                document.getElementById('debugfield').textContent = JSON.stringify(userData, null, 2);
+                
            
                 sendData('/users/register', userData).then((res) => {
                     isDone = true;
-                    document.getElementById('debug1').textContent = JSON.stringify(res, null, 2);
+                    
                     
                     elements.lobby.style.display = 'block';
-                    elements.lineUserData.style.display = 'none';
+                    
                     renderLobby(res);
                     clearLoader();
                 }).catch(function (e) {
-                    document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
+                    
                 });
                 
             }).catch(function (error) {
