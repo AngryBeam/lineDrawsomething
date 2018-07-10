@@ -50,17 +50,17 @@ const elementStrings = {
 };
 
 const renderLoader = parent => {
-    /* const loader = `
+    const loader = `
         <div class="${elementStrings.loader}">
             <img src="images/Ellipsis-1s-200px.gif">
         </div>
     `;
-    parent.insertAdjacentHTML('afterbegin', loader); */
+    parent.insertAdjacentHTML('afterbegin', loader);
 };
 
 const clearLoader = () => {
-    /* const loader = document.querySelector(`.${elementStrings.loader}`);
-    if (loader) loader.parentElement.removeChild(loader); */
+    const loader = document.querySelector(`.${elementStrings.loader}`);
+    if (loader) loader.parentElement.removeChild(loader);
 };
 
 function initializeApp(data) {
@@ -109,9 +109,7 @@ elements.newQuiz.addEventListener("click", () => {
     var quizName = prompt('What your quiz?');
     if(quizName != null){
         //process to gameDrawing
-        
         elements.lobby.style.display = "none";
-        //elements.gamePlay.style.display = "block";
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
     }
@@ -211,7 +209,7 @@ canvas.on('mousemove', function(e) {
 canvas.on('touchmove', function(e) {
     e.preventDefault();
     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-    alert(JSON.stringify(replayData, null, 2));
+    alert(`Last Emit: ${lastEmit} , Now: ${$.now()}`);
     // Emit the event to the server
     if ($.now() - lastEmit > 10)
     {
