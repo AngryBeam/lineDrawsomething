@@ -180,6 +180,7 @@ canvas.on('touchstart', function(e) {
     drawing = true;
     prev.x = touch.pageX;
     prev.y = touch.pageY;
+    alert(drawing);
 });
 
 // On mouse move
