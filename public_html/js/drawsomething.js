@@ -4,7 +4,9 @@ const elements = {
     lobbyTable: document.querySelector('#lobbyTable'),
     gamePlay : document.querySelector('#gamePlay'),
     newQuiz : document.querySelector('#newQuiz'),
-    saveQuiz : document.querySelector('#saveQuiz')
+    saveQuiz : document.querySelector('#saveQuiz'),
+    deleteDrawing : document.querySelector('deleteDrawing'),
+    newDrawing : document.querySelector('#newDrawing')
 };
 
 var userData;
@@ -115,6 +117,8 @@ elements.newQuiz.addEventListener("click", () => {
         elements.newQuiz.style.display = "none";
         elements.saveQuiz.style.display = "block";
         elements.gamePlay.style.display = "block";
+        elements.deleteDrawing.style.display = "block";
+        elements.newDrawing.style.display = "block";
         //console.log(quizName);
     }
 });
@@ -135,6 +139,8 @@ elements.saveQuiz.addEventListener("click", () => {
         elements.newQuiz.style.display = "block";
         elements.saveQuiz.style.display = "none";
         elements.gamePlay.style.display = "none";
+        elements.deleteDrawing.style.display = "none";
+        elements.newDrawing.style.display = "none";
         //elements.lobbyTable.parentElement.removeChild(elements.lobbyTable);
         elements.lobbyTable.innerHTML = '';
         ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
@@ -151,6 +157,17 @@ elements.saveQuiz.addEventListener("click", () => {
         alert(e);
         //document.getElementById('debug2').textContent = JSON.stringify(e, null, 2);
     });
+});
+
+elements.deleteDrawing.addEventListener("click", () => {
+    deleting = true;
+    line_thickness = 20;
+    line_colour = "black";
+});
+
+elements.newDrawing.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
+    replayData = [];
 })
 // Configuration
 var line_thickness = 7;
