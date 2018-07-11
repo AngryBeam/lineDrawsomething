@@ -16,7 +16,7 @@ var isDone = false;
 var quizName;
 var lobbyData;
 var playQuiz = false;
-var playWithQuiz,playWithQuizId;
+var playWithQuiz,playWithQuizId, playData;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
@@ -157,7 +157,7 @@ elements.saveQuiz.addEventListener("click", () => {
         sendData('/users/me', userData).then((res) => {
             renderLobby(res);
             clearLoader();
-            liffAnnounce();
+            liffAnnounce(`ได้สร้างเกมส์ทายคำจากภาพ. มาลองเล่นกัน กดเลย line://app/1589090105-59pDN9ap`);
         }).catch(function (e) {
             clearLoader();
             alert(e);
@@ -190,7 +190,7 @@ elements.lobby.addEventListener("click", (event) => {
         elements.playQuiz.style.display = "block";
 
         canvasInit();
-        var playData = lobbyData.channelList.find(player => player.userId === playWithId);
+        playData = lobbyData.channelList.find(player => player.userId === playWithId);
         var quizId = Math.floor(Math.random() * playData.gamePlay.length);
         var playWithreplayData = playData.gamePlay[quizId].data;
         playWithQuiz = playData.gamePlay[quizId].quiz;
@@ -203,13 +203,14 @@ elements.lobby.addEventListener("click", (event) => {
 
 elements.answerQuiz.addEventListener("click", () =>{
     ansQuiz = prompt(`Your Answer ? ${playWithQuiz}`);
-    if(ansQuiz != null){
+    if(ansQuiz != null && ansQuiz == playWithQuiz){
         alert(`Correct answer ${ansQuiz}`);
+        liffAnnounce(`ได้ทายคำตอบของ ${playData.displayName} ถูกแล้ว!!`);
     }else{
         alert(`Incorrect answer ${ansQuiz}`);
     }
     //Save
-
+    
     //Init
     canvasInit();
     elements.lobby.style.display = "block";
@@ -218,10 +219,10 @@ elements.answerQuiz.addEventListener("click", () =>{
     elements.playQuiz.style.display = "none";
 });
 
-function liffAnnounce(){
+function liffAnnounce(msg){
     liff.sendMessages([{
         type: 'text',
-        text: `${userData.displayName} ได้สร้างเกมส์ทายคำจากภาพ. มาลองเล่นกัน กดเลย line://app/1589090105-59pDN9ap`
+        text: `${userData.displayName} ${msg}`
     }]).catch(function (error) {
         window.alert("Error sending message: " + error);
     });
