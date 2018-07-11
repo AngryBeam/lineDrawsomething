@@ -339,7 +339,7 @@ canvas.on('touchend touchleave touchcancel', function(e) {
 });
 
 function rePlay(data) {
-    console.log('Render Replay');
+    
     //console.log(data);
     // Create cursor
     if ( !(data.id in clients) )
@@ -373,6 +373,7 @@ function rePlay(data) {
 }
 
 function runDrawing(data) {
+    console.log('Running Replay');
     (function theLoop (data, i) {
         setTimeout(function () {
         rePlay(data[i]);
