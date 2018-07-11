@@ -172,7 +172,7 @@ elements.newDrawing.addEventListener("click", () => {
 })
 
 elements.lobby.addEventListener("click", (event) => {
-    alert(event.target.parentNode.parentNode.parentNode);
+    alert(JSON.stringify(event.target.parentNode.parentNode.parentNode, null, 2));
 });
 
 function liffAnnounce(){
