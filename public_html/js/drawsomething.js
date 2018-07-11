@@ -16,6 +16,7 @@ var isDone = false;
 var quizName;
 var lobbyData;
 var playQuiz = false;
+var playWithQuiz,playWithQuizId;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
@@ -192,8 +193,8 @@ elements.lobby.addEventListener("click", (event) => {
         var playData = lobbyData.channelList.find(player => player.userId === playWithId);
         var quizId = Math.floor(Math.random() * playData.gamePlay.length);
         var playWithreplayData = playData.gamePlay[quizId].data;
-        var playWithQuiz = playData.gamePlay[quizId].quiz;
-        var playWithQuizId = playData.gamePlay[quizId].id;
+        playWithQuiz = playData.gamePlay[quizId].quiz;
+        playWithQuizId = playData.gamePlay[quizId].id;
 
         alert(`Hints: ${playWithQuiz.length} words & Starting with ${playWithQuiz[0]}`);
         runDrawing(playWithreplayData);
