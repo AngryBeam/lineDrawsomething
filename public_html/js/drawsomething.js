@@ -195,7 +195,7 @@ elements.lobby.addEventListener("click", (event) => {
         var playWithQuiz = playData.gamePlay[quizId].quiz;
         var playWithQuizId = playData.gamePlay[quizId].id;
 
-        elements.playQuiz.innerHTML = `Hints: ${playWithQuiz.length} words & Starting with ${playWithQuiz[0]}`;
+        alert(`Hints: ${playWithQuiz.length} words & Starting with ${playWithQuiz[0]}`);
         runDrawing(playWithreplayData);
     }
 });
@@ -207,6 +207,14 @@ elements.answerQuiz.addEventListener("click", () =>{
     }else{
         alert("Incorrect answer");
     }
+    //Save
+
+    //Init
+    canvasInit();
+    elements.lobby.style.display = "block";
+    elements.newQuiz.style.display = "block";
+    elements.gamePlay.style.display = "none";
+    elements.playQuiz.style.display = "none";
 });
 
 function liffAnnounce(){
