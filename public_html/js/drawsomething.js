@@ -101,9 +101,9 @@ async function sendData(url, data){
 
 function renderLobby(res){
     res.data.channelList.forEach(element => {
-        var markup = `<tr>
-                        <th><img src="${element.pictureUrl}"></th>
-                        <td id="displayName">${element.displayName} : ${element.gamePlay.length} games</td>
+        var markup = `<tr id="${element.userId}">
+                        <th><img src="${element.pictureUrl}"> <br>${element.displayName} : ${element.gamePlay.length} games</th>
+                        <td id="displayName"><button id="playAgame">Play</button></td>
                     </tr>`;
         elements.lobbyTable.insertAdjacentHTML('beforeend', markup);
     });
@@ -170,6 +170,10 @@ elements.newDrawing.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
     replayData = [];
 })
+
+elements.lobby.addEventListener("click", (event) => {
+    alert(event.target.parentNode.parentNode.parentNode);
+});
 
 function liffAnnounce(){
     liff.sendMessages([{
