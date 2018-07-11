@@ -182,7 +182,7 @@ elements.lobby.addEventListener("click", (event) => {
         elements.newQuiz.style.display = "none";
         elements.gamePlay.style.display = "block";
         canvasInit();
-        var playData = data.channelList.find(player => player.userId === playWithId);
+        var playData = lobbyData.channelList.find(player => player.userId === playWithId);
         var quizId = Math.floor(Math.random() * playData.gamePlay.length);
         var playWithreplayData = playData.gamePlay[quizId].data;
         var playWithQuiz = playData.gamePlay[quizId].quiz;
