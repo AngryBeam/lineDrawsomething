@@ -6,13 +6,16 @@ const elements = {
     newQuiz : document.querySelector('#newQuiz'),
     saveQuiz : document.querySelector('#saveQuiz'),
     deleteDrawing : document.querySelector('#deleteDrawing'),
-    newDrawing : document.querySelector('#newDrawing')
+    newDrawing : document.querySelector('#newDrawing'),
+    playQuiz : document.querySelector('#playQuiz'),
+    answerQuiz : document.querySelector('#answerQuiz')
 };
 
 var userData;
 var isDone = false;
 var quizName;
 var lobbyData;
+var playQuiz = false;
 
 window.onload = function (e) {
     renderLoader(elements.loadBody);
@@ -102,6 +105,7 @@ async function sendData(url, data){
 
 function renderLobby(res){
     lobbyData = res.data;
+    elements.lobbyTable.innerHTML = '';
     lobbyData.channelList.forEach(element => {
         var markup = `<tr id="${element.userId}">
                         <th><img src="${element.pictureUrl}"> <br>${element.displayName} : ${element.gamePlay.length} games</th>
@@ -149,7 +153,6 @@ elements.saveQuiz.addEventListener("click", () => {
         canvasInit();
     }).then(() => {
         //Refresh new lobby
-        elements.lobbyTable.innerHTML = '';
         sendData('/users/me', userData).then((res) => {
             renderLobby(res);
             clearLoader();
@@ -178,16 +181,31 @@ elements.newDrawing.addEventListener("click", () => {
 elements.lobby.addEventListener("click", (event) => {
     var playWithId = event.target.parentNode.parentNode.id;
     if(playWithId){
+        playQuiz = true;
+        
         elements.lobby.style.display = "none";
         elements.newQuiz.style.display = "none";
         elements.gamePlay.style.display = "block";
+        elements.playQuiz.style.display = "block";
+
         canvasInit();
         var playData = lobbyData.channelList.find(player => player.userId === playWithId);
         var quizId = Math.floor(Math.random() * playData.gamePlay.length);
         var playWithreplayData = playData.gamePlay[quizId].data;
         var playWithQuiz = playData.gamePlay[quizId].quiz;
         var playWithQuizId = playData.gamePlay[quizId].id;
+
+        elements.playQuiz.innerHTML = `Hints: ${playWithQuiz.length} words & Starting with ${playWithQuiz[0]}`;
         runDrawing(playWithreplayData);
+    }
+});
+
+elements.answerQuiz.addEventListener("click", () =>{
+    ansQuiz = prompt('Your Answer ?');
+    if(ansQuiz != null && ansQuiz == playWithQuiz){
+        alert("Correct answer");
+    }else{
+        alert("Incorrect answer");
     }
 });
 
@@ -220,6 +238,7 @@ var replayData = []; */
 var lastEmit, replayData, prev, cursors, clients, id;
 
 function canvasInit(){
+    playQuiz = false;
     id = Math.round($.now() * Math.random());
     clients = {};
     cursors = {};
@@ -281,7 +300,7 @@ canvas.on('mousemove', function(e) {
     }
     
     // Draw a line for the current user's movement
-    if (drawing)
+    if (drawing && !playQuiz)
     {
         drawLine(prev.x, prev.y, e.pageX, e.pageY);
         prev.x = e.pageX;
@@ -310,7 +329,7 @@ canvas.on('touchmove', function(e) {
     }
     
     // Draw a line for the current user's movement
-    if (drawing)
+    if (drawing && !playQuiz)
     {
         drawLine(prev.x, prev.y, touch.pageX, touch.pageY);
         prev.x = touch.pageX;
