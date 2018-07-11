@@ -202,7 +202,7 @@ elements.lobby.addEventListener("click", (event) => {
 });
 
 elements.answerQuiz.addEventListener("click", () =>{
-    ansQuiz = prompt(`Your Answer ?`);
+    ansQuiz = prompt(`Your Answer ? ${playWithQuiz}`);
     if(ansQuiz != null){
         alert(`Correct answer ${ansQuiz}`);
     }else{
