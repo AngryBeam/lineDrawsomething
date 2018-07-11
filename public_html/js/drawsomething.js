@@ -201,7 +201,7 @@ elements.lobby.addEventListener("click", (event) => {
 });
 
 elements.answerQuiz.addEventListener("click", () =>{
-    ansQuiz = prompt('Your Answer ?');
+    ansQuiz = prompt(`Your Answer ? ${playWithQuiz}`);
     if(ansQuiz != null && ansQuiz == playWithQuiz){
         alert("Correct answer");
     }else{
