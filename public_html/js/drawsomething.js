@@ -201,11 +201,11 @@ elements.lobby.addEventListener("click", (event) => {
 });
 
 elements.answerQuiz.addEventListener("click", () =>{
-    ansQuiz = prompt(`Your Answer ? ${playWithQuiz}`);
-    if(ansQuiz != null && ansQuiz == playWithQuiz){
-        alert("Correct answer");
+    ansQuiz = prompt(`Your Answer ?`);
+    if(ansQuiz != null){
+        alert(`Correct answer ${ansQuiz}`);
     }else{
-        alert("Incorrect answer");
+        alert(`Incorrect answer ${ansQuiz}`);
     }
     //Save
 
